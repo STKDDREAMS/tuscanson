@@ -10,8 +10,9 @@ Everything lives in `index.html` (HTML + CSS + JS, no build step) with the logo
 in `assets/logo.png`. The main scroll is kept short and minimal — longer
 content lives in popups. Section order:
 
-1. Hero — framed white hero with the flower logo medallion and
-   "Upscale food in a casual setting" tagline
+1. Hero — big centered logo with the "Upscale food in a casual setting"
+   tagline, flanked by two arched photo slots (they drop below the text
+   as a 2-up row on mobile)
 2. Pictures with words — three photo cards (made in house / straight from
    Italy / upscale, but easy); a swipeable row on mobile
 3. Ticker — scrolling values strip (made in house, upscale food, straight
@@ -42,6 +43,8 @@ button, the backdrop, or Escape. On phones they open as bottom sheets.
 Photo slots currently use neutral placeholder art so the site looks finished
 without photography:
 
+- **Hero photos**: in each `.hero-photo`, replace the `.ph-art` div with
+  `<img src="assets/your-photo.jpg" alt="...">` — the arch crop keeps working.
 - **Pictures with words**: in each `.picword`, replace the `.ph-art` div with
   `<img src="assets/your-photo.jpg" alt="...">` — the caption overlay keeps
   working on top of the photo.
