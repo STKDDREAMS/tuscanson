@@ -86,8 +86,8 @@ section{scroll-margin-top:var(--nav-h)}
   font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
   padding:1rem 2.4rem;border-radius:999px;transition:all .2s ease;white-space:nowrap;
 }
-.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 26px rgba(176,46,36,.22)}
-.btn-red:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 14px 30px rgba(176,46,36,.28)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 6px 18px rgba(176,46,36,.16)}
+.btn-red:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 10px 24px rgba(176,46,36,.22)}
 .btn-line{border:1px solid var(--ink);color:var(--ink)}
 .btn-line:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
 .btn-line-w{border:1px solid rgba(255,255,255,.85);color:#fff}
@@ -101,7 +101,7 @@ section{scroll-margin-top:var(--nav-h)}
   color:var(--olive);margin-bottom:.9rem;
 }
 .title{
-  font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,4.6vw,3.6rem);
+  font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6rem);
   line-height:1.1;color:var(--ink);letter-spacing:.01em;
 }
 .title em{font-style:italic;font-weight:400}
@@ -111,11 +111,6 @@ section{scroll-margin-top:var(--nav-h)}
 }
 .center{text-align:center}
 .center .lede{margin-left:auto;margin-right:auto}
-
-/* thin ornamental rule with the brand flower */
-.rule{display:flex;align-items:center;gap:1rem;justify-content:center;margin:1.4rem auto;max-width:260px}
-.rule::before,.rule::after{content:'';flex:1;height:1px;background:var(--line)}
-.rule svg{width:18px;height:18px;flex-shrink:0}
 
 /* placeholder art — swap each .ph-art for a real <img> when photos are ready */
 .ph-art{
@@ -187,14 +182,14 @@ header.site.scrolled{border-bottom-color:var(--line)}
   position:absolute;border:1px solid var(--line);pointer-events:none;
   top:calc(var(--nav-h) + 14px);left:clamp(16px,3vw,32px);right:clamp(16px,3vw,32px);bottom:clamp(16px,3vw,32px);
 }
-.hero-frame::after{content:'';position:absolute;inset:7px;border:1px solid var(--line-soft)}
 .hero-mark{
   position:absolute;top:calc(var(--nav-h) + 14px);left:50%;transform:translate(-50%,-50%);
   width:64px;height:64px;background:var(--white);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
 }
-.hero-mark svg{width:46px;height:46px;animation:bloom 1.2s .2s ease both}
+.hero-mark svg{width:46px;height:46px;animation:bloom 1.2s .2s ease both,heroSpin 90s 1.8s linear infinite}
 @keyframes bloom{from{opacity:0;transform:scale(.5) rotate(-30deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes heroSpin{to{transform:rotate(360deg)}}
 .hero-in{position:relative;z-index:2;max-width:780px}
 .hero-logo{width:min(460px,82vw);margin:0 auto 2.25rem;animation:fadeUp .8s .2s ease both}
 .hero-h1{
@@ -250,7 +245,10 @@ header.site.scrolled{border-bottom-color:var(--line)}
 }
 .picword .ph-art{position:absolute;inset:0}
 .picword .ph-art span{bottom:auto;top:1.2rem}
-.picword img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.picword .ph-art svg{transition:transform .5s ease}
+.picword:hover .ph-art svg{transform:scale(1.06)}
+.picword img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.picword:hover img{transform:scale(1.04)}
 .picword-cap{
   position:relative;z-index:2;width:100%;padding:1.7rem 1.5rem;
   background:linear-gradient(to top,rgba(31,30,26,.78),rgba(31,30,26,0));
@@ -295,16 +293,17 @@ header.site.scrolled{border-bottom-color:var(--line)}
   .mq::before,.mq::after{display:none}
 }
 .dish{
-  width:clamp(215px,24vw,258px);flex-shrink:0;background:var(--white);
-  border:1px solid var(--line);border-radius:140px 140px 20px 20px;
-  padding:.85rem .85rem 1.6rem;text-align:center;cursor:pointer;
-  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  width:clamp(210px,23vw,250px);flex-shrink:0;background:none;border:none;
+  padding:0 0 .5rem;text-align:center;cursor:pointer;
+  transition:transform .35s ease;
 }
-.dish:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(31,30,26,.1);border-color:var(--olive)}
+.dish:hover{transform:translateY(-8px)}
 .dish-art{
-  aspect-ratio:1/1.08;border-radius:130px 130px 14px 14px;background:var(--off-2);
+  aspect-ratio:1/1.14;border-radius:999px 999px 18px 18px;background:var(--off-2);
   display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:1.15rem;
+  transition:background .35s ease;
 }
+.dish:hover .dish-art{background:var(--olive-soft)}
 .dish-art svg{width:72%;height:72%;transition:transform .35s ease}
 .dish:hover .dish-art svg{transform:scale(1.07)}
 .dish-name{
@@ -373,6 +372,13 @@ header.site.scrolled{border-bottom-color:var(--line)}
   content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;
   background:var(--orange);outline:4px solid var(--white);
 }
+.tl .tl-i{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.tl.up .tl-i{opacity:1;transform:none}
+.tl.up .tl-i:nth-child(2){transition-delay:.12s}
+.tl.up .tl-i:nth-child(3){transition-delay:.24s}
+.tl.up .tl-i:nth-child(4){transition-delay:.36s}
+.tl.up .tl-i:nth-child(5){transition-delay:.48s}
+@media(prefers-reduced-motion:reduce){.tl .tl-i{opacity:1;transform:none;transition:none}}
 .tl-y{font-size:.62rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--olive);margin-bottom:.5rem}
 .tl-n{font-family:var(--serif);font-weight:600;font-size:1.22rem;color:var(--ink);margin-bottom:.45rem;line-height:1.25}
 .tl-d{font-size:.85rem;color:var(--ink-soft);line-height:1.75}
@@ -394,11 +400,6 @@ header.site.scrolled{border-bottom-color:var(--line)}
 .community .body-p{font-size:.96rem;line-height:1.95;color:var(--ink-soft);margin-bottom:1.15rem}
 .community .body-p strong{color:var(--ink);font-weight:500}
 .community-photo{aspect-ratio:1;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
-.community-badges{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
-.badge{
-  font-size:.64rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--olive-dk);background:var(--olive-soft);border-radius:999px;padding:.6rem 1.3rem;
-}
 
 /* ════════════════════════ LOCATION ════════════════════════ */
 .loc{background:var(--white);border-top:1px solid var(--line);padding:clamp(4.5rem,9vw,7.5rem) var(--px)}
@@ -430,8 +431,7 @@ header.site.scrolled{border-bottom-color:var(--line)}
 .open-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
 .open-pill.open{background:var(--olive-soft);color:var(--olive-dk)}
 .open-pill.closed{background:var(--orange-soft);color:#9A5322}
-.loc-tags{display:flex;justify-content:center;gap:.65rem;flex-wrap:wrap;max-width:1140px;margin:clamp(2rem,4vw,2.75rem) auto 0}
-.loc-ctas{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2.25rem}
+.loc-ctas{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:clamp(2rem,4vw,2.75rem)}
 .loc-social{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:2.25rem}
 .spill{
   font-size:.66rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;
@@ -463,13 +463,9 @@ header.site.scrolled{border-bottom-color:var(--line)}
 .paper{
   max-width:740px;margin:0 auto;background:var(--paper);
   border:1px solid var(--line);border-radius:8px;
-  box-shadow:0 24px 70px rgba(31,30,26,.1),0 3px 12px rgba(31,30,26,.05);
+  box-shadow:0 12px 44px rgba(31,30,26,.07);
   padding:clamp(2.5rem,6vw,4.25rem) clamp(1.5rem,5vw,3.75rem);
   position:relative;
-}
-.paper::before{
-  content:'';position:absolute;inset:13px;border:1px solid rgba(92,107,60,.3);
-  border-radius:4px;pointer-events:none;
 }
 .paper-head{text-align:center;margin-bottom:2.4rem}
 .paper-head svg{width:38px;height:38px;margin:0 auto .8rem;display:block}
@@ -481,9 +477,6 @@ header.site.scrolled{border-bottom-color:var(--line)}
   font-family:var(--serif);font-style:italic;font-size:1.08rem;color:var(--olive);
   margin-top:.5rem;line-height:1.55;
 }
-.paper-rule{display:flex;align-items:center;gap:.9rem;margin:1.5rem auto 0;max-width:280px}
-.paper-rule::before,.paper-rule::after{content:'';flex:1;height:1px;background:rgba(92,107,60,.35)}
-.paper-rule span{color:var(--orange);font-size:.8rem}
 .paper-items{display:flex;flex-direction:column;gap:1.7rem}
 .pitem{text-align:center;animation:pfade .35s ease both}
 @keyframes pfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -515,7 +508,9 @@ header.site.scrolled{border-bottom-color:var(--line)}
 .ocard{
   background:var(--white);border:1px solid var(--line);border-radius:22px;
   padding:clamp(1.85rem,4vw,2.75rem);display:flex;flex-direction:column;align-items:flex-start;
+  transition:transform .3s ease,box-shadow .3s ease;
 }
+.ocard:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(31,30,26,.07)}
 .ocard .kicker{margin-bottom:.6rem}
 .ocard h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;margin-bottom:1rem;line-height:1.25}
 .ocard .body-p{font-size:.92rem;line-height:1.85;color:var(--ink-soft);margin-bottom:1.5rem}
@@ -528,16 +523,11 @@ header.site.scrolled{border-bottom-color:var(--line)}
 }
 .order-row a{color:var(--ink);border-bottom:1px solid var(--line)}
 .order-row a:hover{color:var(--red);border-color:var(--red)}
-.order-facts{display:flex;justify-content:center;gap:.65rem;flex-wrap:wrap;max-width:1140px;margin:clamp(2rem,4vw,2.75rem) auto 0}
 .gift-panel{
-  max-width:1140px;margin:clamp(1.5rem,3vw,2.25rem) auto 0;
+  max-width:1140px;margin:clamp(2rem,4vw,2.75rem) auto 0;
   background:var(--olive);border-radius:22px;padding:clamp(2rem,4.5vw,3rem);
   display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
   position:relative;overflow:hidden;
-}
-.gift-panel::after{
-  content:'';position:absolute;right:-70px;bottom:-70px;width:240px;height:240px;border-radius:50%;
-  background:radial-gradient(circle,rgba(217,122,61,.3),transparent 65%);
 }
 .gift-panel h3{font-family:var(--serif);font-weight:500;font-size:1.7rem;color:#fff;line-height:1.25;margin-bottom:.4rem}
 .gift-panel p{font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.8;max-width:420px}
@@ -800,7 +790,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
 <section class="hero" aria-label="Welcome">
   <div class="hero-frame" aria-hidden="true"></div>
   <div class="hero-mark" aria-hidden="true"><svg><use href="#fl"/></svg></div>
-  <div class="hero-in">
+  <div class="hero-in" data-plx="-0.18">
     <img class="hero-logo" src="assets/logo.png" alt="Tuscan Son" fetchpriority="high"/>
     <h1 class="hero-h1">Welcome to the family.</h1>
     <p class="hero-sub"><span>Upscale food in a casual setting</span><i>✦</i><span>Century City, Los Angeles</span></p>
@@ -858,8 +848,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   <div class="dishes-head center reveal">
     <p class="kicker">Our Dishes</p>
     <h2 class="title">From our kitchen, <em>to your table.</em></h2>
-    <div class="rule" aria-hidden="true"><svg><use href="#fl"/></svg></div>
-    <p class="lede">Fresh pasta, slow-braised ragùs, panini on house-baked bread, and desserts made from scratch every morning. Tap any dish to browse the menu.</p>
+    <p class="lede" style="margin-top:1.2rem">Fresh pasta, slow-braised ragùs, panini on house-baked bread, and desserts made from scratch every morning. Tap any dish to browse the menu.</p>
   </div>
   <div class="mq reveal">
     <!-- Each .dish-art holds an illustration for now — swap the <svg> for an <img> of the real dish when photos are ready. -->
@@ -879,7 +868,6 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
     </div>
   </div>
   <div class="dishes-cta reveal">
-    <p>…and everything is made from scratch, every single morning.</p>
     <a class="btn btn-line" href="#menu">See the Full Menu</a>
   </div>
 </section>
@@ -898,7 +886,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
       <p class="about-sign">— Massimo, Daniela &amp; Alessandro<small>Chef &amp; Owners · Est. 2017</small></p>
     </div>
     <div class="about-visual reveal">
-      <div class="about-portrait">
+      <div class="about-portrait" data-plx="0.05">
         <!-- Swap this placeholder for a portrait photo: <img src="assets/chef.jpg" alt="Chef Massimo Ormani"> -->
         <div class="in"><div class="ph-art"><svg aria-hidden="true"><use href="#fl-line"/></svg><span>Chef Massimo — Photo</span></div></div>
       </div>
@@ -937,10 +925,6 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
       <p class="body-p">"It's a different vibe — it's more fun," says Daniela. "We get a much younger customer, a lot of young families who are glad to see their kids eating healthy. It's less formal and more relaxed. We live in the neighborhood, and people are excited to bring their friends in."</p>
       <p class="body-p">Massimo shops the Santa Monica and Culver City farmers markets every week, handpicking heirloom tomatoes and seasonal produce for that day's menu. We support local schools, farmers markets, and nonprofits — and everything leaves our kitchen in compostable packaging.</p>
       <p class="body-p"><strong>Proudly Latinx-, LGBTQ-, and women-owned.</strong></p>
-      <div class="community-badges">
-        <span class="badge">Farmers-market produce, weekly</span>
-        <span class="badge">Compostable packaging</span>
-      </div>
     </div>
     <div class="community-photo reveal">
       <!-- Swap for a real photo: <img src="assets/market.jpg" alt="At the farmers market"> -->
@@ -954,8 +938,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   <div class="center reveal">
     <p class="kicker">Visit Us</p>
     <h2 class="title">Find us in <em>Century City.</em></h2>
-    <div class="rule" aria-hidden="true"><svg><use href="#fl"/></svg></div>
-    <p class="lede">Tucked on Santa Monica Boulevard in West LA — with a garden patio, free parking, and a seat waiting for you. No reservations needed, ever.</p>
+    <p class="lede" style="margin-top:1.2rem">Tucked on Santa Monica Boulevard in West LA — with a garden patio, free parking, and a seat waiting for you. No reservations needed, ever.</p>
   </div>
   <div class="loc-grid">
     <div class="loc-card reveal">
@@ -992,13 +975,6 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
       <iframe title="Map — Tuscan Son, 10700 Santa Monica Blvd" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.6281774636695!2d-118.43306492376624!3d34.05711277314618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bbf2e38ac2fd%3A0xe0aa3a27b72e7c56!2s10700%20Santa%20Monica%20Blvd%20%23150%2C%20Los%20Angeles%2C%20CA%2090025!5e0!3m2!1sen!2sus!4v1718480000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
-  <div class="loc-tags reveal">
-    <span class="badge">Free &amp; Easy Parking</span>
-    <span class="badge">No Reservations</span>
-    <span class="badge">Garden Patio</span>
-    <span class="badge">Dog Friendly</span>
-    <span class="badge">Easy Accessibility</span>
-  </div>
   <div class="loc-ctas reveal">
     <a class="btn btn-red" href="https://maps.google.com/?q=10700+Santa+Monica+Blvd+Los+Angeles+CA+90025" target="_blank" rel="noopener">Get Directions</a>
     <a class="btn btn-line" href="tel:+14245353096">Call Us</a>
@@ -1019,12 +995,11 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   </div>
   <div class="mtabs-bar"><div class="mtabs" id="mtabs" role="tablist" aria-label="Menu categories"></div></div>
   <div class="menu-stage">
-    <div class="paper">
+    <div class="paper" data-plx="0.03">
       <div class="paper-head">
         <svg aria-hidden="true"><use href="#fl"/></svg>
         <p class="paper-cat" id="paper-cat"></p>
         <p class="paper-note" id="paper-note"></p>
-        <div class="paper-rule" aria-hidden="true"><span>❧</span></div>
       </div>
       <div class="paper-items" id="paper-items"></div>
       <p class="paper-foot">Everything is made in house, daily — please ask us about today's selections.</p>
@@ -1040,8 +1015,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   <div class="center reveal">
     <p class="kicker">Order Online</p>
     <h2 class="title">Same kitchen, <em>same freshness.</em></h2>
-    <div class="rule" aria-hidden="true"><svg><use href="#fl"/></svg></div>
-    <p class="lede">Ready when you are — brunch through dinner, for pickup or delivery, plus full catering for your home or office.</p>
+    <p class="lede" style="margin-top:1.2rem">Ready when you are — brunch through dinner, for pickup or delivery, plus full catering for your home or office.</p>
   </div>
   <div class="order-cards">
     <div class="ocard reveal">
@@ -1062,12 +1036,6 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
       </div>
       <a class="btn btn-olive" href="https://ts-online-ordering.square.site/?location=S3EJTVKWWVS0C#CNR256IB3W7L3NLN77UIHPKH" target="_blank" rel="noopener">Order Catering</a>
     </div>
-  </div>
-  <div class="order-facts reveal">
-    <span class="badge">Open Daily 9:30am – 9pm</span>
-    <span class="badge">Made Fresh to Order</span>
-    <span class="badge">Free &amp; Easy Parking</span>
-    <span class="badge">No Reservations Needed</span>
   </div>
   <div class="gift-panel reveal">
     <div>
@@ -1295,6 +1263,41 @@ function initReveal(){
   });
 }
 
+/* ── PARALLAX: elements with data-plx drift gently as you scroll ── */
+function initParallax(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = [].slice.call(document.querySelectorAll('[data-plx]'));
+  if (!els.length) return;
+
+  var items = [];
+  function measure(){
+    items = els.map(function(el){
+      var prev = el.style.transform;
+      el.style.transform = 'none';
+      var r = el.getBoundingClientRect();
+      el.style.transform = prev;
+      return { el: el, f: parseFloat(el.getAttribute('data-plx')) || 0,
+               top: r.top + window.scrollY, h: r.height };
+    });
+  }
+
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var vh = window.innerHeight, y = window.scrollY;
+    items.forEach(function(it){
+      if (it.top + it.h < y - 200 || it.top > y + vh + 200) return;
+      var off = (it.top + it.h / 2 - y - vh / 2) * it.f;
+      it.el.style.transform = 'translate3d(0,' + off.toFixed(1) + 'px,0)';
+    });
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+
+  measure(); update();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', function(){ measure(); update(); });
+}
+
 /* ── OPEN NOW (Los Angeles time, open daily 9:30–21:00) ── */
 function initOpenNow(){
   var pill = document.getElementById('open-pill');
@@ -1316,6 +1319,7 @@ document.addEventListener('DOMContentLoaded', function(){
   bindDishes();
   initNav();
   initReveal();
+  initParallax();
   initOpenNow();
   document.getElementById('yr').textContent = new Date().getFullYear();
   document.getElementById('ham').addEventListener('click', function(){ drawerToggle(); });
