@@ -33,10 +33,36 @@ content lives in popups. Section order:
 
 ## Popups
 
-The three popups are native `<dialog>` elements at the bottom of
-`index.html` (`#modal-story`, `#modal-visit`, `#modal-catering`). Any
+The popups are native `<dialog>` elements at the bottom of `index.html`
+(`#modal-story`, `#modal-visit`, `#modal-catering`, `#modal-order`). Any
 element with `data-modal="<dialog-id>"` opens one. They close via the ✕
-button, the backdrop, or Escape. On phones they open as bottom sheets.
+button, the backdrop, Escape, or the phone's back gesture (each open popup
+pushes a history entry). On phones they open as bottom sheets.
+
+`#modal-order` is the **Order & Catering chooser**: the nav, drawer, and
+footer "Order & Catering" links open it so guests pick Pickup & Delivery /
+Catering / Gift Cards before leaving for Square. Plain "Order Online"
+buttons intentionally stay direct links.
+
+## Smart flows
+
+- **Deep links**: `#popup-order`, `#popup-story`, `#popup-visit`,
+  `#popup-catering` open that popup on load; `#menu=dinner` (any category
+  id) opens the menu on that category.
+- **Dish cards** carry `data-item` keys matching `k:` keys in the `MENU`
+  array — tapping a dish scrolls to that exact dish and flashes it.
+- **Menu**: prev/next links under the paper, arrow keys on the tabs, and
+  horizontal swipe on the paper (touch) all change category; a polite
+  live region announces changes to screen readers.
+- **Live hours**: `renderHours()` (LA time, refreshed every minute) drives
+  the location pill, the order popup status line, and the quick-bar dot —
+  including a "Closes soon" state in the last 45 minutes.
+- **Mobile quick-bar**: on phones, a bottom bar (Menu · Order · Call)
+  slides in after the hero scrolls away and hides while popups are open.
+- **Menu JSON-LD** (`schema.org/Menu`) is generated from the same `MENU`
+  array at load, so search engines always see the current menu.
+- **Logo variants**: `assets/logo-400.png` and `assets/logo-1120.png` are
+  resized+quantized from `assets/logo.png` and served via `srcset`.
 
 ## Swapping in real photos
 

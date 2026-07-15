@@ -15,6 +15,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg transform='translate(50,50)'%3E%3Cg fill='%23EDB33B'%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(45)'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(90)'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(135)'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(180)'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(225)'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(270)'/%3E%3Cellipse cx='0' cy='-31' rx='9' ry='18' transform='rotate(315)'/%3E%3C/g%3E%3Ccircle r='16' fill='%235B3A17'/%3E%3C/g%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://ts-online-ordering.square.site">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
@@ -34,7 +35,13 @@
   },
   "openingHours": "Mo-Su 09:30-21:00",
   "acceptsReservations": "false",
-  "url": "https://www.tuscansonla.com"
+  "url": "https://www.tuscansonla.com",
+  "sameAs": [
+    "https://www.instagram.com/tuscansonla/",
+    "https://www.facebook.com/Tuscansonla/",
+    "https://www.yelp.com/biz/tuscan-son-los-angeles",
+    "https://www.tripadvisor.com/Restaurant_Review-g32655-d15175088-Reviews-Tuscan_Son-Los_Angeles_California.html"
+  ]
 }
 </script>
 <style>
@@ -89,15 +96,23 @@ section{scroll-margin-top:var(--nav-h)}
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
   padding:1rem 2.4rem;border-radius:999px;transition:all .2s ease;white-space:nowrap;
+  touch-action:manipulation;
 }
 .btn-red{background:var(--red);color:#fff;box-shadow:0 6px 18px rgba(176,46,36,.16)}
-.btn-red:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 10px 24px rgba(176,46,36,.22)}
 .btn-line{border:1px solid var(--ink);color:var(--ink)}
-.btn-line:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
 .btn-line-w{border:1px solid rgba(255,255,255,.85);color:#fff}
-.btn-line-w:hover{background:#fff;color:var(--olive-dk);transform:translateY(-2px)}
 .btn-olive{background:var(--olive);color:#fff}
-.btn-olive:hover{background:var(--olive-dk);transform:translateY(-2px)}
+@media(hover:hover){
+  .btn-red:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 10px 24px rgba(176,46,36,.22)}
+  .btn-line:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
+  .btn-line-w:hover{background:#fff;color:var(--olive-dk);transform:translateY(-2px)}
+  .btn-olive:hover{background:var(--olive-dk);transform:translateY(-2px)}
+}
+/* pressed feedback on touch */
+@media(hover:none){
+  .btn:active,.dish:active,.spill:active,.opt:active,.qbar a:active,.f-sbtn:active{transform:scale(.97);transition-duration:.06s}
+}
+a,button{touch-action:manipulation}
 
 /* section headings */
 .kicker{
@@ -117,6 +132,13 @@ section{scroll-margin-top:var(--nav-h)}
 .center .lede{margin-left:auto;margin-right:auto}
 .body-p{font-size:.96rem;line-height:1.95;color:var(--ink-soft);margin-bottom:1.15rem}
 .body-p strong{color:var(--ink);font-weight:500}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{
+  position:fixed;top:12px;left:12px;z-index:2000;transform:translateY(-250%);
+  background:var(--ink);color:#fff;padding:.85rem 1.5rem;border-radius:999px;
+  font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;transition:transform .2s;
+}
+.skip:focus{transform:none}
 
 /* placeholder art — swap each .ph-art for a real <img> when photos are ready */
 .ph-art{
@@ -155,7 +177,7 @@ header.site.scrolled{border-bottom-color:var(--line)}
   font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
   padding:.75rem 1.6rem;transition:background .18s,transform .18s;white-space:nowrap;
 }
-.nav-order:hover{background:var(--red-dk);transform:translateY(-1px)}
+@media(hover:hover){.nav-order:hover{background:var(--red-dk);transform:translateY(-1px)}}
 .ham{display:none;flex-direction:column;gap:5.5px;padding:.6rem;flex-shrink:0}
 .ham span{width:24px;height:1.5px;background:var(--ink);transition:all .25s}
 .ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -281,9 +303,11 @@ header.site.scrolled{border-bottom-color:var(--line)}
   border:1px solid var(--line);display:flex;align-items:flex-end;
   transition:transform .3s ease,box-shadow .3s ease;
 }
-.picword:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(31,30,26,.1)}
 .picword:nth-child(2){transform:translateY(clamp(0px,2.5vw,26px))}
-.picword:nth-child(2):hover{transform:translateY(clamp(-6px,1.8vw,20px))}
+@media(hover:hover){
+  .picword:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(31,30,26,.1)}
+  .picword:nth-child(2):hover{transform:translateY(clamp(-6px,1.8vw,20px))}
+}
 @media(max-width:780px){
   .picword:nth-child(2),.picword:nth-child(2):hover{transform:none}
   .picword:hover{transform:none;box-shadow:none}
@@ -291,9 +315,11 @@ header.site.scrolled{border-bottom-color:var(--line)}
 .picword .ph-art{position:absolute;inset:0}
 .picword .ph-art span{bottom:auto;top:1.2rem}
 .picword .ph-art svg{transition:transform .5s ease}
-.picword:hover .ph-art svg{transform:scale(1.06)}
 .picword img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.picword:hover img{transform:scale(1.04)}
+@media(hover:hover){
+  .picword:hover .ph-art svg{transform:scale(1.06)}
+  .picword:hover img{transform:scale(1.04)}
+}
 .picword-cap{
   position:relative;z-index:2;width:100%;padding:1.7rem 1.5rem;
   background:linear-gradient(to top,rgba(31,30,26,.78),rgba(31,30,26,0));
@@ -350,15 +376,17 @@ header.site.scrolled{border-bottom-color:var(--line)}
   padding:0 0 .5rem;text-align:center;cursor:pointer;
   transition:transform .35s ease;
 }
-.dish:hover{transform:translateY(-8px)}
 .dish-art{
   aspect-ratio:1/1.14;border-radius:999px 999px 18px 18px;background:var(--off-2);
   display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:1.15rem;
   transition:background .35s ease;
 }
-.dish:hover .dish-art{background:var(--olive-soft)}
 .dish-art svg{width:72%;height:72%;transition:transform .35s ease}
-.dish:hover .dish-art svg{transform:scale(1.07)}
+@media(hover:hover){
+  .dish:hover{transform:translateY(-8px)}
+  .dish:hover .dish-art{background:var(--olive-soft)}
+  .dish:hover .dish-art svg{transform:scale(1.07)}
+}
 .dish-name{
   display:block;font-family:var(--serif);font-weight:600;font-size:1.28rem;line-height:1.2;
   color:var(--ink);margin-bottom:.35rem;padding:0 .5rem;
@@ -406,12 +434,12 @@ dialog.modal[open]{animation:mIn .32s ease}
 @media(max-width:640px){.modal-body{padding-bottom:max(2rem,env(safe-area-inset-bottom))}}
 .modal-x{
   position:absolute;top:.85rem;right:.85rem;z-index:5;
-  width:42px;height:42px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   background:var(--white);border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
   color:var(--ink);transition:all .18s;
 }
-.modal-x:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+@media(hover:hover){.modal-x:hover{background:var(--ink);border-color:var(--ink);color:#fff}}
 .modal-x svg{width:15px;height:15px}
 .modal-body .title{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:1.4rem}
 .modal-body .kicker:not(:first-child){margin-top:2.3rem}
@@ -429,6 +457,38 @@ dialog.modal[open]{animation:mIn .32s ease}
 .modal-map iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.82)}
 .modal-social{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.6rem}
 .modal-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.8rem}
+
+/* order chooser (inside #modal-order) */
+.modal-hours{margin:-.5rem 0 1.5rem;font-size:.8rem;color:var(--ink-soft)}
+.modal-hours .open-pill{margin-left:0;margin-right:.65rem;vertical-align:-1px}
+.opt{
+  display:flex;align-items:center;gap:1.05rem;width:100%;text-align:left;
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.25rem;
+  transition:border-color .18s,background .18s,transform .18s;
+}
+.opt + .opt{margin-top:.8rem}
+.opt b{display:block;font-family:var(--serif);font-weight:600;font-size:1.22rem;line-height:1.2;margin-bottom:.15rem;color:var(--ink)}
+.opt small{display:block;font-size:.8rem;line-height:1.5;color:var(--ink-soft);font-weight:300}
+.opt-ico{width:44px;height:44px;border-radius:50%;background:var(--olive-soft);color:var(--olive-dk);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt-ico svg{width:19px;height:19px}
+.opt-arrow{margin-left:auto;flex-shrink:0;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);color:var(--ink-soft);display:flex;align-items:center;justify-content:center}
+.opt-arrow svg{width:14px;height:14px}
+.opt-main{background:var(--red);border-color:var(--red);box-shadow:0 10px 26px rgba(176,46,36,.16)}
+.opt-main b{color:#fff}
+.opt-main small{color:rgba(255,255,255,.85)}
+.opt-main .opt-ico{background:rgba(255,255,255,.16);color:#fff}
+.opt-main .opt-arrow{border-color:rgba(255,255,255,.5);color:#fff}
+@media(hover:hover){
+  .opt:hover{border-color:var(--red);background:var(--off)}
+  .opt-main:hover{background:var(--red-dk);border-color:var(--red-dk)}
+}
+.opt-foot{margin-top:1.3rem;font-size:.8rem;color:var(--ink-soft);text-align:center}
+.opt-foot a{color:var(--ink);border-bottom:1px solid var(--line)}
+.opt-foot a:hover{color:var(--red);border-color:var(--red)}
+@media(max-width:420px){
+  .opt{padding:1rem}
+  .opt-ico{display:none}
+}
 
 /* timeline (inside story modal) */
 .mtl{margin:1.5rem 0 .5rem;padding-left:1.55rem;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:1.45rem}
@@ -473,7 +533,7 @@ dialog.modal[open]{animation:mIn .32s ease}
   padding:.6rem 1.25rem;border-radius:999px;border:1px solid var(--line);background:var(--white);
   color:var(--ink-soft);transition:all .18s;
 }
-.spill:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+@media(hover:hover){.spill:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}}
 
 /* ════════════════════════ MENU ════════════════════════ */
 .menu{background:var(--white);padding:clamp(4.5rem,9vw,7.5rem) 0 0;border-top:1px solid var(--line)}
@@ -500,7 +560,7 @@ dialog.modal[open]{animation:mIn .32s ease}
   border:1px solid var(--line);border-radius:8px;
   box-shadow:0 12px 44px rgba(31,30,26,.07);
   padding:clamp(2.5rem,6vw,4.25rem) clamp(1.5rem,5vw,3.75rem);
-  position:relative;
+  position:relative;scroll-margin-top:calc(var(--nav-h) + 60px);
 }
 .paper-head{text-align:center;margin-bottom:2.4rem}
 .paper-cat{
@@ -512,8 +572,11 @@ dialog.modal[open]{animation:mIn .32s ease}
   margin-top:.5rem;line-height:1.55;
 }
 .paper-items{display:flex;flex-direction:column;gap:1.7rem}
-.pitem{text-align:center;animation:pfade .35s ease both}
+.pitem{text-align:center;animation:pfade .35s ease both;scroll-margin-top:calc(var(--nav-h) + 72px);border-radius:12px}
 @keyframes pfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pitem.hit{animation:pfade .35s ease both,hitflash 2.2s ease .25s both}
+@keyframes hitflash{0%,100%{background:transparent;box-shadow:none}14%,55%{background:var(--orange-soft);box-shadow:0 0 0 14px var(--orange-soft)}}
+@media(prefers-reduced-motion:reduce){.pitem,.pitem.hit{animation:none}}
 .pitem-name{
   font-family:var(--serif);font-weight:700;font-size:clamp(1.15rem,2.2vw,1.35rem);
   color:var(--ink);letter-spacing:.02em;margin-bottom:.3rem;
@@ -530,6 +593,15 @@ dialog.modal[open]{animation:mIn .32s ease}
   border-top:1px solid rgba(92,107,60,.3);
   font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-soft);
 }
+.paper-nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1.8rem}
+.paper-nav button{
+  display:inline-flex;align-items:center;gap:.55rem;max-width:48%;
+  font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--olive);
+  padding:.6rem 0;transition:color .15s;text-align:left;
+}
+.paper-nav button:last-child{text-align:right}
+.paper-nav button:hover{color:var(--red)}
+.paper-nav button i{font-style:normal;font-size:.85rem;line-height:1}
 .menu-cta{max-width:740px;margin:2.5rem auto 0;text-align:center}
 
 /* ════════════════════════ ORDER ════════════════════════ */
@@ -544,7 +616,7 @@ dialog.modal[open]{animation:mIn .32s ease}
   padding:clamp(1.85rem,4vw,2.75rem);display:flex;flex-direction:column;align-items:flex-start;
   transition:transform .3s ease,box-shadow .3s ease;
 }
-.ocard:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(31,30,26,.07)}
+@media(hover:hover){.ocard:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(31,30,26,.07)}}
 .ocard .kicker{margin-bottom:.6rem}
 .ocard h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;margin-bottom:1rem;line-height:1.25}
 .ocard .body-p{font-size:.92rem;line-height:1.85;margin-bottom:1.5rem}
@@ -568,6 +640,31 @@ dialog.modal[open]{animation:mIn .32s ease}
 .gift-panel p{font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.8;max-width:420px}
 .gift-panel .btn{position:relative;z-index:1;flex-shrink:0}
 
+/* ════════════════════════ MOBILE QUICK-BAR ════════════════════════ */
+.qbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:900;
+  display:none;grid-template-columns:1fr 1.2fr 1fr;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);
+  transform:translateY(110%);transition:transform .3s ease;
+}
+body.qbar-on .qbar{transform:none}
+body.ui-open .qbar{transform:translateY(110%)}
+.qbar a{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:1rem .25rem;font-size:.64rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+}
+.qbar a + a{border-left:1px solid var(--line)}
+.qbar .q-order{background:var(--red);color:#fff}
+.q-dot{width:7px;height:7px;border-radius:50%;background:#8FD08F;flex-shrink:0}
+.q-dot.soon{background:#F2B36B}
+.q-dot.closed{background:rgba(255,255,255,.45)}
+@media(prefers-reduced-motion:reduce){.qbar{transition:none}}
+@media(hover:none) and (pointer:coarse) and (max-width:860px){
+  .qbar{display:grid}
+  body.qbar-on footer{padding-bottom:calc(4.5rem + env(safe-area-inset-bottom))}
+}
+
 /* ════════════════════════ FOOTER ════════════════════════ */
 footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5rem,6vw,5rem) var(--px) 1.75rem}
 .f-in{
@@ -588,12 +685,12 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
 .f-links a:hover{color:#fff}
 .f-social{display:flex;gap:.7rem;margin-top:1.4rem}
 .f-sbtn{
-  width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.28);
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.28);
   display:flex;align-items:center;justify-content:center;
   font-size:.64rem;font-weight:500;letter-spacing:.05em;color:rgba(255,255,255,.85);
   transition:all .18s;
 }
-.f-sbtn:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+@media(hover:hover){.f-sbtn:hover{background:var(--orange);border-color:var(--orange);color:#fff}}
 .f-bar{
   max-width:1140px;margin:0 auto;padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.14);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;
@@ -602,6 +699,8 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
 </style>
 </head>
 <body>
+
+<a class="skip" href="#top">Skip to content</a>
 
 <!-- ═══════════ SVG LIBRARY (brand mark + dish illustrations) ═══════════ -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -774,17 +873,20 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 13.5 6.5 8a2 2 0 0 1 2-1.5h7a2 2 0 0 1 2 1.5l1.5 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><rect x="3.5" y="13.5" width="17" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7.5" cy="16" r=".8" fill="currentColor"/><circle cx="16.5" cy="16" r=".8" fill="currentColor"/></symbol>
   <symbol id="i-access" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 8v6l4 5M12 11l-4 2 1 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 9 13 5 20 5c0 8-4 14-12 14-1.3 0-3-.5-3 0Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19c3-5 7-8 10-9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6.2 8.5h11.6l-1 11a1.8 1.8 0 0 1-1.8 1.6H9a1.8 1.8 0 0 1-1.8-1.6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.8 8.5V7a3.2 3.2 0 0 1 6.4 0v1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-tray" viewBox="0 0 24 24"><path d="M4.5 16.5a7.5 7.5 0 0 1 15 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M2.8 19.2h18.4M12 9v-1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="6.6" r="1.1" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4.2" y="10.6" width="15.6" height="9.4" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.2 6.8h17.6v3.8H3.2zM12 6.8v13.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 6.8C9.8 6.8 7.6 6 8 4.3 8.4 2.7 11.4 3.4 12 6.8Zm0 0c2.2 0 4.4-.8 4-2.5-.4-1.6-3.4-.9-4 2.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
 </svg>
 
 <!-- ═══════════ NAV ═══════════ -->
 <header class="site" id="nav">
-  <a class="nav-logo" href="#top" aria-label="Tuscan Son — home"><img src="assets/logo.png" alt="Tuscan Son" width="1840" height="292"/></a>
+  <a class="nav-logo" href="#top" aria-label="Tuscan Son — home"><img src="assets/logo-400.png" srcset="assets/logo-400.png 400w, assets/logo-1120.png 1120w" sizes="(max-width:480px) 158px, (max-width:640px) 190px, 227px" alt="Tuscan Son" width="400" height="63" decoding="async"/></a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#dishes" data-s="dishes">Our Dishes</a>
     <a href="#about" data-s="about">About</a>
     <a href="#location" data-s="location">Location</a>
     <a href="#menu" data-s="menu">Menu</a>
-    <a href="#order" data-s="order">Order &amp; Catering</a>
+    <a href="#order" data-s="order" data-modal="modal-order" aria-haspopup="dialog">Order &amp; Catering</a>
   </nav>
   <a class="nav-order" href="https://ts-online-ordering.square.site/" target="_blank" rel="noopener">Order Online</a>
   <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -794,7 +896,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   <a href="#about"><span>About</span><small>02</small></a>
   <a href="#location"><span>Location</span><small>03</small></a>
   <a href="#menu"><span>Menu</span><small>04</small></a>
-  <a href="#order"><span>Order &amp; Catering</span><small>05</small></a>
+  <a href="#order" data-modal="modal-order" aria-haspopup="dialog"><span>Order &amp; Catering</span><small>05</small></a>
   <a class="btn btn-red" href="https://ts-online-ordering.square.site/" target="_blank" rel="noopener">Order Online</a>
 </div>
 
@@ -808,7 +910,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
       <div class="ph-art"><span>Fresh pasta — photo</span></div>
     </div>
     <div class="hero-in" data-plx="-0.14">
-      <img class="hero-logo" src="assets/logo.png" alt="Tuscan Son" width="1840" height="292" fetchpriority="high"/>
+      <img class="hero-logo" src="assets/logo-1120.png" srcset="assets/logo-1120.png 1120w, assets/logo.png 1840w" sizes="(max-width:860px) 94vw, 560px" alt="Tuscan Son" width="1120" height="178" fetchpriority="high" decoding="async"/>
       <h1 class="hero-h1">Welcome to the family.</h1>
       <p class="hero-sub"><span>Upscale food in a casual setting</span><span>Century City, Los Angeles</span></p>
       <div class="hero-ctas">
@@ -874,18 +976,18 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   <div class="mq reveal">
     <!-- Each .dish-art holds an illustration for now — swap the <svg> for an <img> of the real dish when photos are ready. -->
     <div class="mq-track" id="dish-track">
-      <button class="dish" data-cat="dinner"><span class="dish-art"><svg aria-hidden="true"><use href="#d-rigatoni"/></svg></span><span class="dish-name">Rigatoni Burrata</span><span class="dish-tag">Dinner</span></button>
-      <button class="dish" data-cat="dinner"><span class="dish-art"><svg aria-hidden="true"><use href="#d-meatball"/></svg></span><span class="dish-name">Meatball Alessandro</span><span class="dish-tag">Dinner</span></button>
-      <button class="dish" data-cat="brunch"><span class="dish-art"><svg aria-hidden="true"><use href="#d-skillet"/></svg></span><span class="dish-name">The Gladiator</span><span class="dish-tag">Brunch</span></button>
-      <button class="dish" data-cat="lunch"><span class="dish-art"><svg aria-hidden="true"><use href="#d-panino"/></svg></span><span class="dish-name">Short Ribs Panino</span><span class="dish-tag">Lunch</span></button>
-      <button class="dish" data-cat="dinner"><span class="dish-art"><svg aria-hidden="true"><use href="#d-lasagna"/></svg></span><span class="dish-name">Lasagna della Mamma</span><span class="dish-tag">Dinner</span></button>
-      <button class="dish" data-cat="sharables"><span class="dish-art"><svg aria-hidden="true"><use href="#d-soup"/></svg></span><span class="dish-name">Ribollita</span><span class="dish-tag">Sharables</span></button>
-      <button class="dish" data-cat="lunch"><span class="dish-art"><svg aria-hidden="true"><use href="#d-steak"/></svg></span><span class="dish-name">Steak &amp; Arugula</span><span class="dish-tag">Lunch</span></button>
-      <button class="dish" data-cat="sharables"><span class="dish-art"><svg aria-hidden="true"><use href="#d-caprese"/></svg></span><span class="dish-name">Crazee Caprese</span><span class="dish-tag">Sharables</span></button>
-      <button class="dish" data-cat="dinner"><span class="dish-art"><svg aria-hidden="true"><use href="#d-salmon"/></svg></span><span class="dish-name">Grilled Salmone</span><span class="dish-tag">Dinner</span></button>
-      <button class="dish" data-cat="bakery"><span class="dish-art"><svg aria-hidden="true"><use href="#d-tiramisu"/></svg></span><span class="dish-name">House Tiramisu</span><span class="dish-tag">Bakery</span></button>
-      <button class="dish" data-cat="bakery"><span class="dish-art"><svg aria-hidden="true"><use href="#d-bread"/></svg></span><span class="dish-name">Fresh Baked Bread</span><span class="dish-tag">Bakery</span></button>
-      <button class="dish" data-cat="wines"><span class="dish-art"><svg aria-hidden="true"><use href="#d-espresso"/></svg></span><span class="dish-name">Lavazza Espresso</span><span class="dish-tag">Coffee</span></button>
+      <button class="dish" data-cat="dinner" data-item="rigatoni-burrata"><span class="dish-art"><svg aria-hidden="true"><use href="#d-rigatoni"/></svg></span><span class="dish-name">Rigatoni Burrata</span><span class="dish-tag">Dinner</span></button>
+      <button class="dish" data-cat="dinner" data-item="meatball-alessandro"><span class="dish-art"><svg aria-hidden="true"><use href="#d-meatball"/></svg></span><span class="dish-name">Meatball Alessandro</span><span class="dish-tag">Dinner</span></button>
+      <button class="dish" data-cat="brunch" data-item="gladiator"><span class="dish-art"><svg aria-hidden="true"><use href="#d-skillet"/></svg></span><span class="dish-name">The Gladiator</span><span class="dish-tag">Brunch</span></button>
+      <button class="dish" data-cat="lunch" data-item="short-ribs-panino"><span class="dish-art"><svg aria-hidden="true"><use href="#d-panino"/></svg></span><span class="dish-name">Short Ribs Panino</span><span class="dish-tag">Lunch</span></button>
+      <button class="dish" data-cat="dinner" data-item="lasagna-mamma"><span class="dish-art"><svg aria-hidden="true"><use href="#d-lasagna"/></svg></span><span class="dish-name">Lasagna della Mamma</span><span class="dish-tag">Dinner</span></button>
+      <button class="dish" data-cat="sharables" data-item="ribollita"><span class="dish-art"><svg aria-hidden="true"><use href="#d-soup"/></svg></span><span class="dish-name">Ribollita</span><span class="dish-tag">Sharables</span></button>
+      <button class="dish" data-cat="lunch" data-item="steak-arugula"><span class="dish-art"><svg aria-hidden="true"><use href="#d-steak"/></svg></span><span class="dish-name">Steak &amp; Arugula</span><span class="dish-tag">Lunch</span></button>
+      <button class="dish" data-cat="sharables" data-item="crazee-caprese"><span class="dish-art"><svg aria-hidden="true"><use href="#d-caprese"/></svg></span><span class="dish-name">Crazee Caprese</span><span class="dish-tag">Sharables</span></button>
+      <button class="dish" data-cat="dinner" data-item="grilled-salmone"><span class="dish-art"><svg aria-hidden="true"><use href="#d-salmon"/></svg></span><span class="dish-name">Grilled Salmone</span><span class="dish-tag">Dinner</span></button>
+      <button class="dish" data-cat="bakery" data-item="tiramisu"><span class="dish-art"><svg aria-hidden="true"><use href="#d-tiramisu"/></svg></span><span class="dish-name">House Tiramisu</span><span class="dish-tag">Bakery</span></button>
+      <button class="dish" data-cat="bakery" data-item="bread"><span class="dish-art"><svg aria-hidden="true"><use href="#d-bread"/></svg></span><span class="dish-name">Fresh Baked Bread</span><span class="dish-tag">Bakery</span></button>
+      <button class="dish" data-cat="wines" data-item="espresso"><span class="dish-art"><svg aria-hidden="true"><use href="#d-espresso"/></svg></span><span class="dish-name">Lavazza Espresso</span><span class="dish-tag">Coffee</span></button>
     </div>
   </div>
   <div class="dishes-cta reveal">
@@ -940,14 +1042,16 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
     <h2 class="title">What would you like <em>to eat today?</em></h2>
   </div>
   <div class="mtabs-bar"><div class="mtabs" id="mtabs" role="tablist" aria-label="Menu categories"></div></div>
+  <p class="sr" id="menu-live" aria-live="polite"></p>
   <div class="menu-stage">
-    <div class="paper" data-plx="0.03">
+    <div class="paper" id="menu-paper" role="tabpanel" data-plx="0.03">
       <div class="paper-head">
         <p class="paper-cat" id="paper-cat"></p>
         <p class="paper-note" id="paper-note"></p>
       </div>
       <div class="paper-items" id="paper-items"></div>
       <p class="paper-foot">Everything is made in house, daily — please ask us about today's selections.</p>
+      <nav class="paper-nav" id="paper-nav" aria-label="Previous and next menu category"></nav>
     </div>
     <div class="menu-cta">
       <a class="btn btn-red" href="https://ts-online-ordering.square.site/" target="_blank" rel="noopener">Order Online</a>
@@ -1074,11 +1178,43 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
   </div>
 </dialog>
 
+<dialog class="modal" id="modal-order" aria-labelledby="order-title">
+  <button class="modal-x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  <div class="modal-body">
+    <p class="kicker">Order &amp; Catering</p>
+    <h2 class="title" id="order-title">How can we <em>feed you?</em></h2>
+    <p class="modal-hours" id="order-hours" hidden></p>
+    <a class="opt opt-main" href="https://ts-online-ordering.square.site/" target="_blank" rel="noopener" data-choice>
+      <span class="opt-ico"><svg aria-hidden="true"><use href="#i-bag"/></svg></span>
+      <span><b>Pickup &amp; Delivery</b><small>Order ahead online — brunch through dinner, made fresh to order.</small></span>
+      <span class="opt-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="opt" href="https://ts-online-ordering.square.site/?location=S3EJTVKWWVS0C#CNR256IB3W7L3NLN77UIHPKH" target="_blank" rel="noopener" data-choice>
+      <span class="opt-ico"><svg aria-hidden="true"><use href="#i-tray"/></svg></span>
+      <span><b>Catering</b><small>Home or office — customizable menus for any size gathering.</small></span>
+      <span class="opt-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="opt" href="https://app.squareup.com/gift/MZTGRY9W6BDWV/order" target="_blank" rel="noopener" data-choice>
+      <span class="opt-ico"><svg aria-hidden="true"><use href="#i-gift"/></svg></span>
+      <span><b>Gift Cards</b><small>Digital gift cards — always the right choice, always the right size.</small></span>
+      <span class="opt-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <p class="opt-foot">Planning something big? <a href="#" data-swap="modal-catering">See catering details</a> or text Ramon at <a href="sms:+13109277771">(310) 927-7771</a>.</p>
+  </div>
+</dialog>
+
+<!-- ═══════════ MOBILE QUICK-BAR ═══════════ -->
+<nav class="qbar" id="qbar" aria-label="Quick actions">
+  <a href="#menu">Menu</a>
+  <a class="q-order" href="https://ts-online-ordering.square.site/" target="_blank" rel="noopener"><span class="q-dot" id="q-dot" hidden></span>Order</a>
+  <a href="tel:+14245353096">Call</a>
+</nav>
+
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="f-in">
     <div class="f-brand">
-      <img src="assets/logo.png" alt="Tuscan Son" width="1840" height="292"/>
+      <img src="assets/logo-400.png" srcset="assets/logo-400.png 400w, assets/logo-1120.png 1120w" sizes="214px" alt="Tuscan Son" width="400" height="63" loading="lazy" decoding="async"/>
       <p>10700 Santa Monica Blvd, Suite 150<br>Los Angeles, CA 90025<br>Open Daily · 9:30am – 9:00pm<br><a href="tel:+14245353096">(424) 535-3096</a><br><a href="mailto:son@tuscansonla.com">son@tuscansonla.com</a></p>
       <div class="f-social">
         <a class="f-sbtn" href="https://www.instagram.com/tuscansonla/" target="_blank" rel="noopener" title="Instagram">IG</a>
@@ -1094,7 +1230,7 @@ footer{background:var(--olive-dk);color:rgba(255,255,255,.68);padding:clamp(3.5r
         <a href="#about">About</a>
         <a href="#location">Location</a>
         <a href="#menu">Menu</a>
-        <a href="#order">Order &amp; Catering</a>
+        <a href="#order" data-modal="modal-order" aria-haspopup="dialog">Order &amp; Catering</a>
         <a href="https://app.squareup.com/gift/MZTGRY9W6BDWV/order" target="_blank" rel="noopener">Gift Cards</a>
       </div>
     </div>
@@ -1120,9 +1256,9 @@ var MENU = [
   { id:'sharables', label:'Sharables',
     note:'To begin, and to share',
     items:[
-      {n:'Ribollita', d:"Massimo's hearty Tuscan kale and organic vegetable soup, thickened with bread — his acclaimed recipe, exclusively here"},
+      {k:'ribollita', n:'Ribollita', d:"Massimo's hearty Tuscan kale and organic vegetable soup, thickened with bread — his acclaimed recipe, exclusively here"},
       {n:'Zuppa del Giorno', d:'Fresh vegetable purée soup of the day — dairy free, gluten free, organic'},
-      {n:'Crazee Caprese', d:'Vine ripe tomato, Fiordilatte mozzarella, avocado, basil, and our green olive oil sauce on ciabatta'},
+      {k:'crazee-caprese', n:'Crazee Caprese', d:'Vine ripe tomato, Fiordilatte mozzarella, avocado, basil, and our green olive oil sauce on ciabatta'},
       {n:'Tuscan Son Salad', d:'Organic romaine and heirloom tomatoes with our house dressing'},
       {n:'Roman Caesar', d:'Romaine hearts, Parmigiano Reggiano, house-made croutons, and our own Caesar dressing', note:'add organic chicken or grilled shrimp'}
     ]},
@@ -1135,32 +1271,32 @@ var MENU = [
       {n:'Italian Scramble', d:'Roasted broccoli, crushed avocado, Fiordilatte mozzarella, fresh basil'},
       {n:'Garden Frittata', d:'Spinach, mushroom, tomato, onion, peppers, Fiordilatte mozzarella'},
       {n:'Tuscan Ranchero', d:'Eggs, mozzarella, basil, tomato sauce, avocado, and roasted jalapeño'},
-      {n:'The Gladiator', d:'Grass fed sliced steak, two sunny side up eggs, crushed avocado, green olive oil sauce, toasted multigrain'}
+      {k:'gladiator', n:'The Gladiator', d:'Grass fed sliced steak, two sunny side up eggs, crushed avocado, green olive oil sauce, toasted multigrain'}
     ]},
   { id:'lunch', label:'Lunch',
     note:'Paninis served with organic romaine, heirloom tomatoes &amp; house balsamic',
     items:[
-      {n:'Short Ribs Panino', d:'Oven braised boneless beef short ribs, caramelized onions, melted Fontina, baguette'},
+      {k:'short-ribs-panino', n:'Short Ribs Panino', d:'Oven braised boneless beef short ribs, caramelized onions, melted Fontina, baguette'},
       {n:'Pollo Verde Panino', d:'Grilled organic chicken, grilled zucchini, melted Fontina, tomato, avocado, basil, ciabatta'},
       {n:'Tonno Mare Panino', d:'Imported Italian tuna, Kalamata olives, romaine, tomato, light aioli, multigrain'},
       {n:'Meatball &amp; Cheese Panino', d:'All beef meatballs, house tomato sauce, mozzarella, basil, baguette'},
       {n:'Toscana Chop', d:'Romaine, organic grilled chicken, Italian ham, Kalamata olives, garbanzo, heirloom tomato, Pecorino Toscano, aged balsamic'},
       {n:'Grilled Shrimp Salad', d:'Romaine, roasted zucchini, broccoli, roasted corn, avocado, heirloom tomatoes, grilled shrimp, house dressing'},
       {n:'Salmon &amp; Beet Salad', d:'Grilled salmon, organic arugula, beets, red onion, heirloom tomatoes, lemon vinaigrette'},
-      {n:'Steak &amp; Arugula', d:'Grilled grass fed steak, wild arugula, baby heirloom tomatoes, Parmigiano Reggiano, lemon vinaigrette'}
+      {k:'steak-arugula', n:'Steak &amp; Arugula', d:'Grilled grass fed steak, wild arugula, baby heirloom tomatoes, Parmigiano Reggiano, lemon vinaigrette'}
     ]},
   { id:'dinner', label:'Dinner',
     note:'Pasta made fresh daily — plates served with one side',
     items:[
-      {n:'Rigatoni Burrata &amp; Melanzane', d:'Sautéed eggplant, house tomato sauce, basil, topped with fresh burrata'},
+      {k:'rigatoni-burrata', n:'Rigatoni Burrata &amp; Melanzane', d:'Sautéed eggplant, house tomato sauce, basil, topped with fresh burrata'},
       {n:'Spicy Salmon Pasta', d:'Cavatappi, sustainable salmon, organic arugula, heirloom tomato, white wine'},
       {n:'Rigatoni Fiorentina', d:'Slow braised all-beef Bolognese with organic green peas'},
       {n:'Pasta Shrimp &amp; Vodka', d:'Penne, shrimp, and a light pink vodka sauce'},
-      {n:'Lasagna della Mamma', d:'Braised all-beef Bolognese, béchamel, Parmigiano Reggiano'},
+      {k:'lasagna-mamma', n:'Lasagna della Mamma', d:'Braised all-beef Bolognese, béchamel, Parmigiano Reggiano'},
       {n:'Hot Skillet Mac &amp; Cheese', d:'Cavatappi, imported Fontina, cheddar, Parmigiano Reggiano, fresh cream, house bread crumbs', note:'add truffle'},
-      {n:'Meatball Alessandro', d:'Grass fed all beef meatballs in our house tomato sauce'},
+      {k:'meatball-alessandro', n:'Meatball Alessandro', d:'Grass fed all beef meatballs in our house tomato sauce'},
       {n:'Short Ribs', d:'Slow braised boneless beef short ribs, aromatic soffritto and porcini, chianti wine sauce'},
-      {n:'Grilled Salmone', d:'Sustainable grilled salmon with Italian pico de gallo'},
+      {k:'grilled-salmone', n:'Grilled Salmone', d:'Sustainable grilled salmon with Italian pico de gallo'},
       {n:'Pollo al Funghi', d:'Organic chicken breast, shiitake and oyster mushrooms, heirloom tomato, basil'},
       {n:'Tender Grilled Steak', d:'Grass fed sliced steak with our green olive oil sauce'},
       {n:'Eggplant Lasagna', d:'No pasta — grilled eggplant, tomato sauce, braised beef, mozzarella, basil', note:'keto &amp; gluten free'},
@@ -1174,22 +1310,34 @@ var MENU = [
       {n:'House Red', d:'A rotating selection, poured by the glass or bottle'},
       {n:'House White', d:'Crisp and bright — ask what we’re pouring today'},
       {n:'Craft Beer', d:'Rotating local and Italian selections'},
-      {n:'Lavazza Espresso', d:'Authentic Italian espresso, the gold standard'},
+      {k:'espresso', n:'Lavazza Espresso', d:'Authentic Italian espresso, the gold standard'},
       {n:'Cappuccino', d:'Lavazza espresso with steamed milk'},
       {n:'Iced Latte', d:'Espresso over ice with your choice of milk'}
     ]},
   { id:'bakery', label:'House Made Bakery',
     note:'Baked fresh in house, every morning',
     items:[
-      {n:'Fresh Baked Bread', d:'Made daily and served warm with olive oil'},
+      {k:'bread', n:'Fresh Baked Bread', d:'Made daily and served warm with olive oil'},
       {n:'Pastries &amp; Cookies', d:'A rotating selection of Italian pastries and cookies, baked in house'},
-      {n:'Tiramisu', d:'The classic, made from scratch in our kitchen'},
+      {k:'tiramisu', n:'Tiramisu', d:'The classic, made from scratch in our kitchen'},
       {n:'Seasonal Desserts', d:'Rotating house made Italian desserts — ask what’s fresh today'}
     ]}
 ];
 
 var activeCat = 'sharables';
 var tabBtns = {};
+var REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function decode(s){
+  var d = document.createElement('div');
+  d.innerHTML = s;
+  return d.textContent;
+}
+
+function menuIndex(id){
+  for (var i = 0; i < MENU.length; i++){ if (MENU[i].id === id) return i; }
+  return 0;
+}
 
 /* build the tab buttons once — switching categories only swaps classes,
    so the tab bar keeps its scroll position on mobile */
@@ -1199,56 +1347,121 @@ function initMenuTabs(){
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'mtab';
+    b.id = 'mtab-' + c.id;
     b.setAttribute('role', 'tab');
+    b.setAttribute('aria-controls', 'menu-paper');
+    b.setAttribute('aria-selected', 'false');
+    b.tabIndex = -1;
     b.innerHTML = c.label;
     b.addEventListener('click', function(){ renderMenu(c.id); });
     bar.appendChild(b);
     tabBtns[c.id] = b;
   });
+  /* arrow keys move between categories */
+  bar.addEventListener('keydown', function(e){
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    var i = menuIndex(activeCat);
+    var n = MENU[(i + (e.key === 'ArrowRight' ? 1 : MENU.length - 1)) % MENU.length];
+    renderMenu(n.id);
+    tabBtns[n.id].focus();
+  });
+  /* prev/next links at the bottom of the paper */
+  document.getElementById('paper-nav').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-go]');
+    if (!b) return;
+    renderMenu(b.getAttribute('data-go'));
+    document.getElementById('menu-paper').scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block:'start'});
+  });
 }
 
 function renderMenu(id){
-  var cat = null;
-  for (var i = 0; i < MENU.length; i++){ if (MENU[i].id === id){ cat = MENU[i]; break; } }
-  if (!cat) return;
-  activeCat = id;
+  var i = menuIndex(id);
+  var cat = MENU[i];
+  if (!cat || !tabBtns[cat.id]) return;
+  activeCat = cat.id;
 
   MENU.forEach(function(c){
     var b = tabBtns[c.id];
-    b.classList.toggle('active', c.id === id);
-    b.setAttribute('aria-selected', c.id === id);
+    var on = c.id === cat.id;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', on);
+    b.tabIndex = on ? 0 : -1;
   });
   /* keep the active tab visible when the bar overflows on small screens */
-  var b = tabBtns[id], bar = document.querySelector('.mtabs-bar');
+  var b = tabBtns[cat.id], bar = document.querySelector('.mtabs-bar');
   if (bar && bar.scrollWidth > bar.clientWidth){
     bar.scrollTo({left: b.offsetLeft - (bar.clientWidth - b.offsetWidth) / 2, behavior:'smooth'});
   }
 
+  document.getElementById('menu-paper').setAttribute('aria-labelledby', 'mtab-' + cat.id);
   document.getElementById('paper-cat').innerHTML = cat.label;
   document.getElementById('paper-note').innerHTML = cat.note || '';
 
   var out = '';
   for (var k = 0; k < cat.items.length; k++){
     var it = cat.items[k];
-    out += '<div class="pitem" style="animation-delay:' + (k * 35) + 'ms">'
+    out += '<div class="pitem"' + (it.k ? ' data-k="' + it.k + '"' : '') + ' style="animation-delay:' + (k * 35) + 'ms">'
         +  '<p class="pitem-name">' + it.n + '</p>'
         +  '<p class="pitem-desc">' + it.d + '</p>'
         +  (it.note ? '<p class="pitem-note">' + it.note + '</p>' : '')
         +  '</div>';
   }
   document.getElementById('paper-items').innerHTML = out;
+
+  /* prev / next category links */
+  var prev = MENU[(i + MENU.length - 1) % MENU.length];
+  var next = MENU[(i + 1) % MENU.length];
+  document.getElementById('paper-nav').innerHTML =
+      '<button type="button" data-go="' + prev.id + '"><i>←</i>' + prev.label + '</button>'
+    + '<button type="button" data-go="' + next.id + '">' + next.label + '<i>→</i></button>';
+
+  /* announce the change to screen readers */
+  var live = document.getElementById('menu-live');
+  if (live) live.textContent = decode(cat.label) + ' menu, ' + cat.items.length + ' items';
 }
 
-/* dish cards → jump to menu category */
+/* dish cards → jump to the exact dish on the menu
+   (delegated so the marquee clones work too) */
 function bindDishes(){
-  var dishes = document.querySelectorAll('.dish');
-  for (var i = 0; i < dishes.length; i++){
-    dishes[i].addEventListener('click', function(){
-      var cat = this.getAttribute('data-cat');
-      if (cat) renderMenu(cat);
-      document.getElementById('menu').scrollIntoView({behavior:'smooth'});
-    });
-  }
+  var track = document.getElementById('dish-track');
+  if (!track) return;
+  track.addEventListener('click', function(e){
+    var d = e.target.closest('.dish');
+    if (!d) return;
+    var cat = d.getAttribute('data-cat');
+    if (cat) renderMenu(cat);
+    var key = d.getAttribute('data-item');
+    var target = key ? document.querySelector('.pitem[data-k="' + key + '"]') : null;
+    if (target){
+      target.classList.add('hit');
+      target.scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block:'start'});
+      setTimeout(function(){ target.classList.remove('hit'); }, 3000);
+    } else {
+      document.getElementById('menu').scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth'});
+    }
+  });
+}
+
+/* swipe left/right on the menu paper to change category — guarded so it
+   never fights vertical scrolling or links */
+function initMenuSwipe(){
+  var paper = document.getElementById('menu-paper');
+  if (!paper) return;
+  var x0 = 0, y0 = 0, on = false;
+  paper.addEventListener('touchstart', function(e){
+    if (e.target.closest('a,button')){ on = false; return; }
+    on = true; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, {passive:true});
+  paper.addEventListener('touchend', function(e){
+    if (!on) return;
+    on = false;
+    var dx = e.changedTouches[0].clientX - x0;
+    var dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < 2 * Math.abs(dy)) return;
+    var i = menuIndex(activeCat);
+    renderMenu(MENU[(i + (dx < 0 ? 1 : MENU.length - 1)) % MENU.length].id);
+  }, {passive:true});
 }
 
 /* ── MARQUEES: duplicate track content for a seamless loop ──
@@ -1264,33 +1477,93 @@ function dupTrack(id){
   }
 }
 
-/* ── POPUPS ── */
-function openModal(id){
+/* ── POPUPS (back-gesture friendly) ── */
+var closingViaHistory = false;
+
+function openModal(id, mode){
   var d = document.getElementById(id);
-  if (!d) return;
+  if (!d || d.open) return;
   /* the map iframe only loads the first time its popup opens */
   var lazy = d.querySelector('iframe[data-src]');
   if (lazy){ lazy.src = lazy.getAttribute('data-src'); lazy.removeAttribute('data-src'); }
-  if (typeof d.showModal === 'function'){
-    d.showModal();
-    document.body.style.overflow = 'hidden';
-  } else {
-    d.setAttribute('open', '');
-  }
+  if (typeof d.showModal === 'function'){ d.showModal(); }
+  else { d.setAttribute('open', ''); }
+  syncUI();
+  /* history entry so the phone's back gesture closes the popup, not the page */
+  try{
+    if (mode === 'replace') history.replaceState({modal:id}, '', '');
+    else history.pushState({modal:id}, '', '');
+  }catch(e){}
   var mb = d.querySelector('.modal-body');
   if (mb) mb.scrollTop = 0;
 }
 
+function closeModal(d){
+  if (typeof d.close === 'function') d.close();
+  else { d.removeAttribute('open'); syncUI(); }
+}
+
 function initModals(){
   document.querySelectorAll('[data-modal]').forEach(function(b){
-    b.addEventListener('click', function(){ openModal(b.getAttribute('data-modal')); });
+    b.addEventListener('click', function(e){
+      e.preventDefault();
+      openModal(b.getAttribute('data-modal'));
+    });
   });
   document.querySelectorAll('dialog.modal').forEach(function(d){
-    d.addEventListener('click', function(e){ if (e.target === d) d.close(); });
-    d.addEventListener('close', function(){ document.body.style.overflow = ''; });
+    d.addEventListener('click', function(e){ if (e.target === d) closeModal(d); });
+    d.addEventListener('close', function(){
+      syncUI();
+      if (closingViaHistory){ closingViaHistory = false; return; }
+      /* drop the history entry this popup pushed */
+      if (history.state && history.state.modal === d.id){ try{ history.back(); }catch(e){} }
+    });
     var x = d.querySelector('[data-close]');
-    if (x) x.addEventListener('click', function(){ d.close ? d.close() : d.removeAttribute('open'); });
+    if (x) x.addEventListener('click', function(){ closeModal(d); });
+    /* choosing an option closes the popup behind the new tab */
+    d.querySelectorAll('[data-choice]').forEach(function(a){
+      a.addEventListener('click', function(){ setTimeout(function(){ closeModal(d); }, 120); });
+    });
+    /* links that swap to another popup (reuse the same history entry) */
+    d.querySelectorAll('[data-swap]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        closingViaHistory = true; /* this close must not pop history */
+        closeModal(d);
+        closingViaHistory = false;
+        openModal(a.getAttribute('data-swap'), 'replace');
+      });
+    });
   });
+  window.addEventListener('popstate', function(){
+    var open = document.querySelector('dialog.modal[open]');
+    if (open){ closingViaHistory = true; closeModal(open); }
+  });
+}
+
+/* ── one place decides scroll-lock + quick-bar visibility ── */
+var lockY = 0;
+function syncUI(){
+  var drawerOpen = document.getElementById('drawer').classList.contains('open');
+  var dlgOpen = !!document.querySelector('dialog.modal[open]');
+  var lock = drawerOpen || dlgOpen;
+  var b = document.body;
+  b.classList.toggle('ui-open', lock);
+  var locked = b.classList.contains('locked');
+  if (lock && !locked){
+    lockY = window.scrollY;
+    var sbw = window.innerWidth - document.documentElement.clientWidth;
+    b.style.position = 'fixed';
+    b.style.top = -lockY + 'px';
+    b.style.left = '0'; b.style.right = '0'; b.style.width = '100%';
+    if (sbw > 0) b.style.paddingRight = sbw + 'px';
+    b.classList.add('locked');
+  } else if (!lock && locked){
+    b.classList.remove('locked');
+    b.style.position = b.style.top = b.style.left = b.style.right = b.style.width = b.style.paddingRight = '';
+    try{ window.scrollTo({top:lockY, left:0, behavior:'instant'}); }
+    catch(e){ window.scrollTo(0, lockY); }
+  }
 }
 
 /* ── NAV: scrolled state, drawer, scroll-spy ── */
@@ -1326,7 +1599,7 @@ function drawerToggle(open){
   d.classList.toggle('open', isOpen);
   h.classList.toggle('open', isOpen);
   h.setAttribute('aria-expanded', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  syncUI();
 }
 
 /* ── REVEAL ON SCROLL ── */
@@ -1383,36 +1656,114 @@ function initParallax(){
   window.addEventListener('resize', function(){ measure(); update(); });
 }
 
-/* ── OPEN NOW (Los Angeles time, open daily 9:30–21:00) ── */
-function initOpenNow(){
-  var pill = document.getElementById('open-pill');
-  if (!pill) return;
+/* ── LIVE HOURS (Los Angeles time, open daily 9:30–21:00) ──
+   one source of truth for the location pill, order popup & quick-bar dot */
+function getHoursState(){
   try{
     var la = new Date(new Date().toLocaleString('en-US', {timeZone:'America/Los_Angeles'}));
     var mins = la.getHours() * 60 + la.getMinutes();
     var open = mins >= 570 && mins < 1260; /* 9:30 → 21:00 */
-    pill.textContent = open ? 'Open now' : 'Opens 9:30am';
-    pill.className = 'open-pill ' + (open ? 'open' : 'closed');
+    return {ok:true, open:open, soon:open && (1260 - mins) <= 45};
+  }catch(e){ return {ok:false}; }
+}
+
+function renderHours(){
+  var s = getHoursState();
+  if (!s.ok) return;
+  var label = s.open ? (s.soon ? 'Closes soon' : 'Open now') : 'Opens 9:30am';
+  var cls = s.open && !s.soon ? 'open' : 'closed';
+  var pill = document.getElementById('open-pill');
+  if (pill){
+    pill.textContent = label;
+    pill.className = 'open-pill ' + cls;
     pill.hidden = false;
-  }catch(e){ /* leave hidden if timezone math fails */ }
+  }
+  var oh = document.getElementById('order-hours');
+  if (oh){
+    oh.innerHTML = '<span class="open-pill ' + cls + '">' + label + '</span>'
+      + (s.open ? 'Kitchen closes at 9:00 PM' : 'Order ahead — we open at 9:30 AM');
+    oh.hidden = false;
+  }
+  var dot = document.getElementById('q-dot');
+  if (dot){
+    dot.className = 'q-dot' + (s.open ? (s.soon ? ' soon' : '') : ' closed');
+    dot.hidden = false;
+  }
+}
+
+/* ── MOBILE QUICK-BAR: slides in once the hero scrolls away ── */
+function initQbar(){
+  var hero = document.querySelector('.hero');
+  if (!hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ document.body.classList.toggle('qbar-on', !e.isIntersecting); });
+  }, {threshold:0}).observe(hero);
+}
+
+/* ── DEEP LINKS: #popup-order · #popup-story · #popup-visit · #popup-catering · #menu=dinner ── */
+function handleDeepLink(){
+  var h = location.hash, m;
+  if (!h) return;
+  if ((m = h.match(/^#popup-(order|story|visit|catering)$/))){
+    try{ history.replaceState(null, '', location.pathname + location.search); }catch(e){}
+    openModal('modal-' + m[1]);
+  } else if ((m = h.match(/^#menu=([a-z]+)$/)) && tabBtns[m[1]]){
+    try{ history.replaceState(null, '', location.pathname + location.search + '#menu'); }catch(e){}
+    renderMenu(m[1]);
+    setTimeout(function(){ document.getElementById('menu').scrollIntoView(); }, 0);
+  }
+}
+function initDeepLink(){
+  handleDeepLink();
+  window.addEventListener('hashchange', handleDeepLink);
+}
+
+/* ── MENU STRUCTURED DATA — generated from the same MENU array ── */
+function injectMenuSchema(){
+  try{
+    var schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Menu',
+      name: 'Tuscan Son Menu',
+      inLanguage: 'en',
+      hasMenuSection: MENU.map(function(c){
+        return {
+          '@type': 'MenuSection',
+          name: decode(c.label),
+          description: decode(c.note || ''),
+          hasMenuItem: c.items.map(function(it){
+            return {'@type': 'MenuItem', name: decode(it.n), description: decode(it.d)};
+          })
+        };
+      })
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+  }catch(e){}
 }
 
 document.addEventListener('DOMContentLoaded', function(){
   /* touch devices get a native swipe row (CSS) — no duplication needed there,
      and none under reduced motion where the animations are off */
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!reduce) dupTrack('ticker-track');
-  if (!reduce && !touch) dupTrack('dish-track');
+  if (!REDUCE) dupTrack('ticker-track');
+  if (!REDUCE && !touch) dupTrack('dish-track');
 
   initMenuTabs();
   renderMenu('sharables');
   bindDishes();
+  initMenuSwipe();
   initNav();
   initReveal();
   initParallax();
-  initOpenNow();
+  renderHours();
+  setInterval(renderHours, 60000);
   initModals();
+  initQbar();
+  initDeepLink();
+  injectMenuSchema();
   document.getElementById('yr').textContent = new Date().getFullYear();
   document.getElementById('ham').addEventListener('click', function(){ drawerToggle(); });
   document.querySelectorAll('.drawer a').forEach(function(a){
